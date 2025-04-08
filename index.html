@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blade Runner (1982)</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url('bladerunner-bg.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #e0e0e0;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      position: relative;
+    }
+
+    /* Dark overlay for readability */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.25);
+      z-index: -1;
+    }
+
+    header {
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 20px;
+      text-align: center;
+    }
+    
+    header h1 {
+      font-size: 2.8rem;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+      letter-spacing: 2px;
+      margin: 0;
+      color: #00ffff;
+      margin-bottom: 10px;
+    }
+    
+    header p {
+      font-style: italic;
+      color: #aaa;
+      font-size: 1.2rem;
+    }
+
+    nav {
+      background: linear-gradient(to right, rgba(20, 20, 40, 0.9), rgba(40, 20, 60, 0.9));
+      padding: 15px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+    
+    nav a {
+      color: #00ffff;
+      text-decoration: none;
+      margin: 0 15px;
+      padding: 8px 15px;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      font-weight: bold;
+    }
+    
+    nav a:hover {
+      background-color: rgba(0, 255, 255, 0.2);
+      text-shadow: 0 0 8px rgba(0, 255, 255, 0.7);
+    }
+
+    section {
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 900px;
+      border-radius: 5px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      border: 1px solid #333;
+      border-bottom: 1px solid #333;
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+    
+    h2 {
+      color: #00ffff;
+      border-bottom: 1px solid #00ffff;
+      padding-bottom: 10px;
+      font-size: 1.8rem;
+    }
+    
+    p, li {
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+    
+    ul {
+      padding-left: 20px;
+    }
+    
+    li {
+      margin-bottom: 10px;
+    }
+    
+    strong {
+      color: #00ffff;
+    }
+    
+    em {
+      font-style: italic;
+      color: #aaa;
+    }
+    
+    blockquote {
+      border-left: 3px solid #00ffff;
+      padding-left: 15px;
+      margin: 20px 0;
+      font-style: italic;
+      color: #ccc;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border: 1px solid #444;
+      margin-top: 10px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    }
+    
+    img:hover {
+      transform: scale(1.02);
+      box-shadow: 0 6px 12px rgba(0, 255, 255, 0.3);
+    }
+    
+    iframe {
+      display: block;
+      max-width: 100%;
+      margin-top: 20px;
+    }
+    
+    audio {
+      width: 100%;
+      margin-top: 10px;
+      background-color: rgba(20, 20, 40, 0.7);
+      border-radius: 10px;
+      padding: 10px;
+    }
+    
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.8);
+      color: #aaa;
+      margin-top: 40px;
+      border-top: 1px solid #333;
+    }
+    
+    /* 霓虹灯效果 */
+    .neon-text {
+      color: #fff;
+      text-shadow: 
+        0 0 5px #00ffff,
+        0 0 10px #00ffff,
+        0 0 20px #00ffff,
+        0 0 40px #0ff,
+        0 0 80px #0ff;
+      animation: flicker 1.5s infinite alternate;
+    }
+    
+    @keyframes flicker {
+      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+        text-shadow: 
+          0 0 5px #00ffff,
+          0 0 10px #00ffff,
+          0 0 20px #00ffff,
+          0 0 40px #0ff,
+          0 0 80px #0ff;
+      }
+      20%, 24%, 55% {        
+        text-shadow: none;
+      }
+    }
+    
+    /* 画廊样式 */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      margin: 20px 0;
+    }
+    
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 5px;
+    }
+    
+    .caption {
+      background: rgba(0, 0, 0, 0.7);
+      color: #00ffff;
+      padding: 10px;
+      margin: 0;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+    
+    /* 角色卡片 */
+    .character-card {
+      background: rgba(30, 30, 60, 0.7);
+      border-radius: 8px;
+      padding: 15px;
+      margin: 15px 0;
+      border-left: 4px solid #00ffff;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .character-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 255, 255, 0.2);
+    }
+    
+    .character-card h3 {
+      margin-top: 0;
+      color: #00ffff;
+    }
+    
+    /* 加载动画 */
+    .loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    
+    .loader-inner {
+      width: 100px;
+      height: 60px;
+      text-align: center;
+      font-size: 10px;
+    }
+    
+    .loader-line-wrap {
+      animation: spin 2000ms cubic-bezier(.175, .885, .32, 1.275) infinite;
+      box-sizing: border-box;
+      height: 50px;
+      left: 0;
+      overflow: hidden;
+      position: absolute;
+      top: 0;
+      transform-origin: 50% 100%;
+      width: 100px;
+    }
+    
+    .loader-line {
+      border: 4px solid transparent;
+      border-radius: 100%;
+      box-sizing: border-box;
+      height: 100px;
+      left: 0;
+      margin: 0 auto;
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 100px;
+    }
+    
+    .loader-line-wrap:nth-child(1) { 
+      animation-delay: -50ms; 
+    }
+    .loader-line-wrap:nth-child(1) .loader-line {
+      border-color: #00ffff;
+      height: 90px;
+      width: 90px;
+      top: 7px;
+    }
+    
+    .loader-line-wrap:nth-child(2) { 
+      animation-delay: -100ms; 
+    }
+    .loader-line-wrap:nth-child(2) .loader-line {
+      border-color: #00a2ff;
+      height: 76px;
+      width: 76px;
+      top: 14px;
+    }
+    
+    .loader-line-wrap:nth-child(3) { 
+      animation-delay: -150ms; 
+    }
+    .loader-line-wrap:nth-child(3) .loader-line {
+      border-color: #0066ff;
+      height: 62px;
+      width: 62px;
+      top: 21px;
+    }
+    
+    .loader-line-wrap:nth-child(4) { 
+      animation-delay: -200ms; 
+    }
+    .loader-line-wrap:nth-child(4) .loader-line {
+      border-color: #0033ff;
+      height: 48px;
+      width: 48px;
+      top: 28px;
+    }
+    
+    .loader-line-wrap:nth-child(5) { 
+      animation-delay: -250ms; 
+    }
+    .loader-line-wrap:nth-child(5) .loader-line {
+      border-color: #0000ff;
+      height: 34px;
+      width: 34px;
+      top: 35px;
+    }
+    
+    @keyframes spin {
+      0%, 15% {
+        transform: rotate(0);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    
+    /* 返回顶部按钮 */
+    #back-to-top {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      border: none;
+      border-radius: 50%;
+      background-color: rgba(0, 255, 255, 0.7);
+      color: #000;
+      font-size: 20px;
+      cursor: pointer;
+      z-index: 99;
+      transition: all 0.3s ease;
+    }
+    
+    #back-to-top:hover {
+      background-color: rgba(0, 255, 255, 1);
+      transform: translateY(-5px);
+    }
+    
+    /* 粒子画布 */
+    #particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+    }
+    
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+      nav a {
+        display: block;
+        margin: 5px 0;
+      }
+      
+      section {
+        margin: 10px;
+        padding: 15px;
+      }
+      
+      header h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- 加载动画 -->
+<div class="loader">
+  <div class="loader-inner">
+    <div class="loader-line-wrap">
+      <div class="loader-line"></div>
+    </div>
+    <div class="loader-line-wrap">
+      <div class="loader-line"></div>
+    </div>
+    <div class="loader-line-wrap">
+      <div class="loader-line"></div>
+    </div>
+    <div class="loader-line-wrap">
+      <div class="loader-line"></div>
+    </div>
+    <div class="loader-line-wrap">
+      <div class="loader-line"></div>
+    </div>
+  </div>
+</div>
+
+<!-- 粒子背景 -->
+<canvas id="particles"></canvas>
+
+<!-- 返回顶部按钮 -->
+<button id="back-to-top" title="Go to top">↑</button>
+
+<header class="animate__animated animate__fadeIn">
+  <h1 class="neon-text">Blade Runner (1982)</h1>
+  <p>A Post-modernism Sci-fiction masterpiece</p>
+</header>
+
+<nav class="animate__animated animate__fadeIn">
+  <a href="#plot">Plot</a>
+  <a href="#characters">Characters</a>
+  <a href="#themes">Themes</a>
+  <a href="#postmodern">Post-Modernism</a>
+  <a href="#gallery">Gallery</a>
+  <a href="#soundtrack">Soundtrack</a>
+  <a href="#facts">Fun Facts</a>
+  <a href="#about">About</a>
+</nav>
+
+<section id="plot" class="animate__animated animate__fadeInUp">
+  <h2>Plot Summary</h2>
+  <p>
+    Set in a dystopian Los Angeles in 2019, <em>Blade Runner</em> follows Rick Deckard, a "blade runner" tasked with hunting down bioengineered beings known as replicants. These replicants, created by the Tyrell Corporation, are virtually indistinguishable from humans and are used for off-world labor. After a group of rogue replicants return to Earth seeking to extend their lifespans, Deckard is called out of retirement to "retire" them.
+  </p>
+  <p>
+    As Deckard tracks the replicants, he encounters Rachael, a replicant who believes she's human. As he questions what it means to be human, Deckard begins to empathize with the replicants, especially their leader, Roy Batty. The film ends ambiguously, questioning Deckard's own humanity and leaving viewers to ponder the nature of life and consciousness.
+  </p>
+</section>
+
+<section id="characters" class="animate__animated animate__fadeInUp">
+  <h2>Main Characters</h2>
+  
+  <div class="character-card">
+    <h3>Rick Deckard</h3>
+    <p>Played by Harrison Ford, a retired blade runner pulled back into duty.</p>
+  </div>
+  
+  <div class="character-card">
+    <h3>Roy Batty</h3>
+    <p>Portrayed by Rutger Hauer, the intelligent and poetic leader of the replicants.</p>
+  </div>
+  
+  <div class="character-card">
+    <h3>Rachael</h3>
+    <p>Played by Sean Young, a replicant who believes she's human.</p>
+  </div>
+  
+  <div class="character-card">
+    <h3>Gaff</h3>
+    <p>Played by Edward James Olmos, a mysterious officer who leaves cryptic origami messages.</p>
+  </div>
+  
+  <div class="character-card">
+    <h3>Dr. Eldon Tyrell</h3>
+    <p>Played by Joe Turkel, the creator of the replicants.</p>
+  </div>
+</section>
+
+<section id="themes" class="animate__animated animate__fadeInUp">
+  <h2>Themes & Analysis</h2>
+  <p>
+    <em>Blade Runner</em> explores profound philosophical themes such as:
+  </p>
+  <ul>
+    <li><strong>What It Means to Be Human</strong>: The replicants show more emotion and depth than many humans.</li>
+    <li><strong>Memory and Identity</strong>: Rachael's false memories raise questions about the soul and identity.</li>
+    <li><strong>Technology vs. Nature</strong>: The bleak cityscape contrasts with dreams of off-world colonies and nature.</li>
+    <li><strong>Mortality</strong>: Roy Batty's final monologue reflects on life, death, and the meaning of experience.</li>
+  </ul>
+</section>
+  
+<section id="postmodern" class="animate__animated animate__fadeInUp">
+  <h2>Post-Modernism in Blade Runner</h2>
+  <p>
+   Blade Runner serves as a prime example of postmodernism, as it both reflects the characteristics of postmodernity and incorporates elements of the postmodern condition into its narrative.
+  </p>
+  <p>
+   The film explores various postmodern strategies such as quotation, recycling, pastiche, hyperreality, and the crisis of identity, both in its form, content, and ideological foundation.
+  </p>
+  <p>
+   In Blade Runner, there is an overarching postmodern identity crisis that affects all characters and elements of the story. The Los Angeles of 2019 is depicted as a city in constant turmoil, made up of a mix of different styles and trends. It lacks a clear geographical center, a coherent past to draw from, a stable history to anchor itself to, and a unified present that could foster a sense of community.
+  </p>
+  <p>
+   This fragmented state is why the replicants, including Deckard, are drawn to it. They can relate to and mirror the city's chaotic, fractured nature. Their connection with the city stems from a deep, despairing desire for completeness—each character in the film yearns for a place, a history, and a personal narrative to claim as their own.
+  </p>
+  <blockquote>
+    "All those moments will be lost in time, like tears in rain."<br>
+    — Roy Batty's iconic final monologue
+  </blockquote>
+  <p>
+   A key reference in the film is the now-defunct Pan Am airline, which represents Scott's vision of the future. Ironically, this company went bankrupt and no longer exists. Additionally, the 1980s saw a rise in Japanese wealth, with the Japanese purchasing significant amounts of land in the U.S., particularly in Los Angeles. These references appear in the film, reflecting Ridley Scott's future vision.
+  </p>
+  <p>
+   While Blade Runner is set in the future, it combines elements from various pasts, blending different historical and cultural influences.
+  </p>
+  <p>
+   The film also quotes from various film genres, movements, and periods, incorporating scenes directly from older films like Metropolis (a science fiction classic) and Mildred Pierce (a film noir). Additionally, it uses references to pop culture, such as the New York skyline and the pulp fiction of Raymond Chandler.
+  </p>
+  <p>
+   As Baudrillard notes, Blade Runner is a key example of postmodern cinema, where science, technology, and progress are questioned and shown to have failed. The film's world is plagued by pollution, industry, and overcrowding, with only the wealthy able to escape to off-world colonies. A central theme of the film is the blurring of lines between the real and the artificial, as well as between humans and replicants. As a result, it becomes increasingly difficult to define what it truly means to be 'human.'
+  </p>
+</section>
+
+<section id="gallery" class="animate__animated animate__fadeInUp">
+  <h2>Gallery</h2>
+  <p>Here are some iconic visuals (placeholders shown):</p>
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <img src="https://via.placeholder.com/600x300?text=Blade+Runner+Cityscape" alt="Cityscape" />
+      <p class="caption">Dystopian Los Angeles, 2019</p>
+    </div>
+    <div class="gallery-item">
+      <img src="https://via.placeholder.com/600x300?text=Rachael+and+Deckard" alt="Rachael and Deckard" />
+      <p class="caption">Rachael and Deckard</p>
+    </div>
+  </div>
+  
+  <h3>Official Trailer</h3>
+  <iframe width="560" height="315"
+    src="https://www.youtube.com/embed/eogpIG53Cis"
+    title="Blade Runner Trailer"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+</section>
+
+<section id="soundtrack" class="animate__animated animate__fadeInUp">
+  <h2>Soundtrack</h2>
+  <p>
+    One of the most iconic parts of <em>Blade Runner</em> is its haunting synth soundtrack, composed by Vangelis.
+    Here's a track to set the mood:
+  </p>
+  <audio controls>
+    <source src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Vangelis/Blade_Runner_Soundtrack/Vangelis_-_Blade_Runner_End_Titles.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
+</section>
+
+<section id="facts" class="animate__animated animate__fadeInUp">
+  <h2>Fun Facts</h2>
+  <ul>
+    <li>Rutger Hauer improvised the famous "Tears in Rain" monologue.</li>
+    <li>The film's dystopian design inspired <em>The Matrix</em>, <em>Ghost in the Shell</em>, and others.</li>
+    <li>Harrison Ford reportedly clashed with Ridley Scott during filming.</li>
+    <li>There are 7 known versions of the movie!</li>
+  </ul>
+</section>
+
+<section id="about" class="animate__animated animate__fadeInUp">
+  <h2>About This Site</h2>
+  <p>
+    This website was created as a tribute to one of the most influential sci-fi films of all time. Created by Alex Dong. <br />
+    Contact: <a href="mailto:dongalex26@gmail.com" style="color:#00ffff;">dongalex26@gmail.com</a>
+  </p>
+</section>
+
+<footer class="animate__animated animate__fadeIn">
+  <p>&copy; Alex Dong, English Blade Runner(1982).</p>
+</footer>
+
+<script>
+// 页面加载完成后隐藏加载动画
+window.addEventListener('load', function() {
+  document.querySelector('.loader').style.display = 'none';
+});
+
+// 返回顶部按钮
+window.onscroll = function() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    document.getElementById("back-to-top").style.display = "block";
+  } else {
+    document.getElementById("back-to-top").style.display = "none";
+  }
+};
+
+document.getElementById("back-to-top").addEventListener("click", function() {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+});
+
+// 粒子效果
+document.addEventListener('DOMContentLoaded', function() {
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  
+  const particles = [];
+  const particleCount = 100;
+  
+  for (let i = 0; i < particleCount; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      size: Math.random() * 3 + 1,
+      speedX: Math.random() * 1 - 0.5,
+      speedY: Math.random() * 1 - 0.5
+    });
+  }
+  
+  function animateParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    for (let i = 0; i < particles.length; i++) {
+      const p = particles[i];
+      
+      ctx.fillStyle = 'rgba(0, 255, 255, 0.5)';
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fill();
+      
+      p.x += p.speedX;
+      p.y += p.speedY;
+      
+      if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
+      if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+    }
+    
+    requestAnimationFrame(animateParticles);
+  }
+  
+  animateParticles();
+  
+  window.addEventListener('resize', function() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+});
+</script>
+
+</body>
+</html>
